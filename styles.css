@@ -19,9 +19,9 @@
 *,
 *:after,
 *:before {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
 }
 
 html {
@@ -47,7 +47,7 @@ img {
 	width: 150px;
 }
 
-header div {
+.header-flex, .header-flex-inner-div {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -69,51 +69,75 @@ h2 {
 	font-size: 16px;
 }
 
-button {
+a.join-button {
 	border: none;
 	background-color: var(--deep-plum);
-	padding: 10px 25px;
+	padding: 8px 20px;
 	border-radius: 5px;
 	font-size: 20px;
 	color: white;
+	text-decoration: none;
 
 	&:hover {
-		cursor: pointer;
 		background-color: var(--teal);
 	}
 }
 
 /* NAV BAR */
 
-nav ul {
-	list-style-type: none;
+nav .tab-bar {
 	display: flex;
 	justify-content: flex-end;
+	border: none;
+	padding: none;
 	padding-right: 50px;
 }
 
-nav ul li {
+nav .tab-label {
+	display: block;
 	margin: 10px;
 	border: none;
 	padding: 5px 25px;
 	border-radius: 10px 10px 0px 0px;
-	margin-bottom: 0px; 
+	margin-bottom: 0px;
 	font-size: 16px;
 
 	&:hover {
 		cursor: pointer;
 	}
+
+	&:has(input:focus-visible) {
+		outline: 2px solid black;
+	}
+}
+
+/* Tab selection and display */
+
+input[name="tab-select"] {
+	appearance: none;
+	position: absolute;
+}
+
+.tab-content {
+	display: none;
+}
+
+nav:has(#tab-select-about:checked) ~ #about-section,
+nav:has(#tab-select-vision:checked) ~ #vision-section,
+nav:has(#tab-select-apply:checked) ~ #apply-section,
+nav:has(#tab-select-contact:checked) ~ #contact-section {
+	display: block;
 }
 
 /* ABOUT */
 
-.inactive-about {
+#tab-label-about {
 	background-color: white;
 	color: var(--heather-blue);
 }
 
-.active-about,
-.inactive-about:hover {
+#tab-label-about:has(#tab-select-about:checked),
+#tab-label-about:hover {
 	background-color: var(--heather-blue);
 	color: white;
 }
@@ -124,13 +148,13 @@ nav ul li {
 
 /* VISION + VALUES */
 
-.inactive-vision {
+#tab-label-vision {
 	background-color: white;
 	color: var(--deep-purple);
 }
 
-.active-vision,
-.inactive-vision:hover {
+#tab-label-vision:has(#tab-select-vision:checked),
+#tab-label-vision:hover {
 	background-color: var(--deep-purple);
 	color: white;
 }
@@ -141,13 +165,13 @@ nav ul li {
 
 /* GET INVOLVED */
 
-.inactive-apply {
+#tab-label-apply {
 	background-color: white;
 	color: var(--teal);
 }
 
-.active-apply,
-.inactive-apply:hover {
+#tab-label-apply:has(#tab-select-apply:checked),
+#tab-label-apply:hover {
 	background-color: var(--teal);
 	color: white;
 }
@@ -158,13 +182,13 @@ nav ul li {
 
 /* CONTACT US */
 
-.inactive-contact {
+#tab-label-contact {
 	background-color: white;
 	color: var(--robins-egg-blue);
 }
 
-.active-contact,
-.inactive-contact:hover {
+#tab-label-contact:has(#tab-select-contact:checked),
+#tab-label-contact:hover {
 	background-color: var(--robins-egg-blue);
 	color: white;
 }
@@ -246,7 +270,7 @@ section > ul > ul > li {
 		text-align: center;
 		margin-top: 10px;
 	}
-  
+
 	.header-flex div {
 		text-align: center;
 	}
@@ -288,15 +312,15 @@ section > ul > ul > li {
 		display: flex;
 		flex-direction: column;
 	}
-	
+
 	section > ul > li {
 		margin-left: 20px;
 	}
-	
+
 	section > ul > ul > li {
 		margin-left: 40px;
 	}
-	
+
 	section {
 		padding: 20px;
 	}
@@ -322,10 +346,4 @@ section > ul > ul > li {
 	section {
 		padding: 8px;
 	}
-}
-
-/* HIDDEN CLASS (must stay at bottom) */
-
-.hidden {
-	display: none;
 }
